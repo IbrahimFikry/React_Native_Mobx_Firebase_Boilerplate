@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, TouchableOpacity } from 'react-native';
 import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
 import { Constants } from 'expo';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { inject, observer, Provider } from 'mobx-react';
 
 const CONST_HEIGHT = Dimensions.get('window').height;
@@ -41,21 +41,21 @@ class RegisterPage extends React.Component{
 
             <View style={{alignSelf: 'stretch', margin: 3, padding: 10,}}>
               <View style={{flexDirection: 'row',height: 45, padding:10, paddingLeft: 10, marginBottom:1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 35,}}>
-                <Icon style={{paddingLeft: 10,}} name="user" size={30} color="#91999c" />
+                <Icon style={{paddingLeft: 10,}} name="user" size={24} color="#91999c" />
                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 18,paddingLeft: 10,flex:1,color: 'white'}} placeholder='Email'></TextInput>
               </View>
             </View>
 
             <View style={{alignSelf: 'stretch', margin: 3, padding: 10,}}>
               <View style={{flexDirection: 'row',height: 45, padding:10, paddingLeft: 10, marginBottom:1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 35,}}>
-                <Icon style={{paddingLeft: 10,}} name="lock" size={30} color="#91999c" />
+                <Icon style={{paddingLeft: 10,}} name="lock" size={24} color="#91999c" />
                 <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={{fontSize: 18,paddingLeft: 10,flex:1,color: 'white'}} placeholder='Password'></TextInput>
               </View>
             </View>
 
             <View style={{alignSelf: 'stretch', margin: 3, padding: 10,}}>
               <View style={{flexDirection: 'row',height: 45, padding:10, paddingLeft: 10, marginBottom:1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 35,}}>
-                <Icon style={{paddingLeft: 10,}} name="lock" size={30} color="#91999c" />
+                <Icon style={{paddingLeft: 10,}} name="lock" size={24} color="#91999c" />
                 <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={{fontSize: 18,paddingLeft: 10,flex:1,color: 'white'}} placeholder='Confirm Password'></TextInput>
               </View>
             </View>
@@ -103,14 +103,14 @@ class LoginPage extends React.Component{
 
             <View style={{alignSelf: 'stretch', margin: 3, padding: 10,}}>
               <View style={{flexDirection: 'row',height: 45, padding:10, paddingLeft: 10, marginBottom:1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 35,}}>
-                <Icon style={{paddingLeft: 10,}} name="user" size={30} color="#91999c" />
+                <Icon style={{paddingLeft: 10,}} name="user" size={24} color="#91999c" />
                 <TextInput underlineColorAndroid='transparent' style={{fontSize: 18,paddingLeft: 10,flex:1,color: 'white'}} placeholder='Email'></TextInput>
               </View>
             </View>
 
             <View style={{alignSelf: 'stretch', margin: 3, padding: 10,}}>
               <View style={{flexDirection: 'row',height: 45, padding:10, paddingLeft: 10, marginBottom:1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 35,}}>
-                <Icon style={{paddingLeft: 10,}} name="lock" size={30} color="#91999c" />
+                <Icon style={{paddingLeft: 10,}} name="lock" size={24} color="#91999c" />
                 <TextInput secureTextEntry={true} underlineColorAndroid='transparent' style={{fontSize: 18,paddingLeft: 10,flex:1,color: 'white'}} placeholder='Password'></TextInput>
               </View>
             </View>
@@ -193,9 +193,27 @@ class Tab3 extends React.Component{
 
 const TabHomePage = createBottomTabNavigator(
   {
-    Tab1: {screen: Tab1,},
-    Tab2: {screen: Tab2,},
-    Tab3: {screen: Tab3,},
+    Tab1: {
+      screen: Tab1,
+      navigationOptions: {
+        tabBarLabel: 'Dashboard',
+        tabBarIcon: () => <Icon name="th" size={24} style={{color:'gray'}} />,
+      },
+    },
+    Tab2: {
+      screen: Tab2,
+      navigationOptions: {
+        tabBarLabel: 'Dashboard',
+        tabBarIcon: () => <Icon name="bar-chart" size={24} style={{color:'gray'}} />,
+      },
+    },
+    Tab3: {
+      screen: Tab3,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarIcon: () => <Icon name="gear" size={24} style={{color:'gray'}} />,
+      },
+    },
   }
 )
 
@@ -235,42 +253,6 @@ export default class Master extends React.Component{
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
