@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dime
 import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import { inject, observer, Provider } from 'mobx-react';
 
 const CONST_HEIGHT = Dimensions.get('window').height;
 const CONST_WIDTH = Dimensions.get('window').width;
@@ -10,6 +11,7 @@ const CONST_WIDTH = Dimensions.get('window').width;
 import loginimage from './asset/image/login.jpg';
 import iconimage from './asset/image/icon.png';
 
+import stores from "./stores";
 
 class RegisterPage extends React.Component{
   constructor(props){
@@ -71,6 +73,8 @@ class RegisterPage extends React.Component{
     )
   }
 }
+@inject('auth')
+@observer
 class LoginPage extends React.Component{
   constructor(props){
     super(props);
@@ -80,7 +84,10 @@ class LoginPage extends React.Component{
     this.props.navigation.navigate("RegisterPage");
   }
 
-
+  _skip = () => {
+    console.log('skip');
+    this.props.auth.setCheck(true);
+  }
 
   render() {
     return(
@@ -122,7 +129,7 @@ class LoginPage extends React.Component{
             </View>
 
             <View style={{flexDirection:'row', alignSelf:'stretch', margin:20, justifyContent:'flex-end'}}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this._skip}>
                 <Text style={{color:'white'}}>Skip</Text>
               </TouchableOpacity>
             </View>
@@ -192,23 +199,20 @@ const TabHomePage = createBottomTabNavigator(
   }
 )
 
+@inject('auth')
+@observer
 class LoadingStackNav extends React.Component{
   constructor(props){
     super(props);
 
-    //Change the login status for different logic
-    this.state = {
-      login: false,
-    }
-
   }
   render() {
 
-    if(this.state.login == false){
+    if(this.props.auth.check == false){
       return <RegisterAndLogin/>
     }
 
-    if(this.state.login == true){
+    if(this.props.auth.check == true){
       return <TabHomePage/>
     }
 
@@ -218,14 +222,19 @@ class LoadingStackNav extends React.Component{
     )
   }
 }
-export default createStackNavigator(
-  {
-    LoadingStackNav: {screen: LoadingStackNav,},
-  },
-  {
-    headerMode:'none',
+
+export default class Master extends React.Component{
+  constructor(props){
+    super(props);
   }
-)
+  render() {
+    return(
+      <Provider {...stores}>
+        <LoadingStackNav/>
+      </Provider>
+    )
+  }
+}
 
 
 
