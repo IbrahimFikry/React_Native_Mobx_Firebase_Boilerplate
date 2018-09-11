@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, TouchableOpacity, FlatList } from 'react-native';
 import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -160,8 +160,36 @@ class Tab1 extends React.Component{
   }
   render() {
     return(
-      <View>
-      <Text>This is homepage</Text>
+      <View style={{paddingTop:Constants.statusBarHeight + 5}}>
+        <View style={{height:40, flexDirection:'row', justifyContent:'space-between'}}>
+
+          <View style={{paddingLeft:16}}>
+            <Icon name="camera" size={20}/>
+          </View>
+          <View>
+            <Text>Dashboard</Text>
+          </View>
+          <View style={{paddingRight:16}}>
+            <Icon name="info-circle" size={20}/>
+          </View>
+
+        </View>
+
+        <FlatList
+          numColumns={3}
+          data={[
+            {key:'a', name:'Ibrahim Fikry asjdhasjdhaskjdhaskj'},
+            {key:'b', name:'Syimah Ismail' },
+            {key:'c', name: 'Haziq Faris'},
+            {key:'d', name:'Huhu'},
+            {key:'e', name:'Haha'},
+            {key:'f', name:'Hoho'},
+          ]}
+          renderItem={({item}) => <View style={{width:Dimensions.get('window').width/3}}><Image style={{height:Dimensions.get('window').width/3,width:Dimensions.get('window').width/3}} source={loginimage}/></View>
+          }
+        />
+
+
       </View>
     )
   }
