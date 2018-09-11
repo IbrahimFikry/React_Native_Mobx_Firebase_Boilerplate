@@ -9,6 +9,7 @@ const CONST_HEIGHT = Dimensions.get('window').height;
 const CONST_WIDTH = Dimensions.get('window').width;
 
 import loginimage from './asset/image/login.jpg';
+import rainbow from './asset/image/rainbow.jpg';
 import iconimage from './asset/image/icon.png';
 
 import stores from "./stores";
@@ -184,8 +185,20 @@ class Tab1 extends React.Component{
             {key:'d', name:'Huhu'},
             {key:'e', name:'Haha'},
             {key:'f', name:'Hoho'},
+            {key:'g', name:'Huhu'},
+            {key:'h', name:'Haha'},
+            {key:'i', name:'Hoho'},
+            {key:'j', name:'Huhu'},
+            {key:'k', name:'Haha'},
+            {key:'l', name:'Hoho'},
+            {key:'m', name:'Huhu'},
+            {key:'n', name:'Haha'},
+            {key:'o', name:'Hoho'},
+            {key:'p', name:'Huhu'},
+            {key:'q', name:'Haha'},
+            {key:'r', name:'Hoho'},
           ]}
-          renderItem={({item}) => <View style={{width:Dimensions.get('window').width/3}}><Image style={{height:Dimensions.get('window').width/3,width:Dimensions.get('window').width/3}} source={loginimage}/></View>
+          renderItem={({item}) => <View style={{width:Dimensions.get('window').width/3}}><Image style={{height:Dimensions.get('window').width/3,width:Dimensions.get('window').width/3}} source={rainbow}/></View>
           }
         />
 
