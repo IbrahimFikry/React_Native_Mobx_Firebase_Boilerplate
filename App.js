@@ -246,7 +246,28 @@ class Tab4 extends React.Component{
 class Tab5 extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      theme: false,
+      notifications: false,
+      hmm: true,
+    }
   }
+
+  _theme = (x) => {
+    console.log("theme toggle");
+    this.setState({theme:x})
+  }
+  _notifications = (x) => {
+    console.log("noti toggle");
+    this.setState({notifications:x})
+  }
+  _hmm = (x) => {
+    console.log("hmm toggle");
+    this.setState({hmm:x})
+  }
+
+
+
   render() {
     return(
       <View style={{paddingTop:Constants.statusBarHeight}}>
@@ -255,6 +276,7 @@ class Tab5 extends React.Component{
         </View>
 
         <ScrollView>
+          <TouchableOpacity>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
             <View style={{flex:3,paddingLeft:16}}>
               <Text>Profile</Text>
@@ -262,12 +284,13 @@ class Tab5 extends React.Component{
             <View style={{flex:1,paddingRight:16}}>
             </View>
           </View>
+          </TouchableOpacity>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
             <View style={{flex:3,paddingLeft:16}}>
               <Text>Theme (Light/Black)</Text>
             </View>
             <View style={{flex:1,paddingRight:16}}>
-              <Switch/>
+              <Switch onValueChange={(x) => this._theme(x)} value={this.state.theme}/>
             </View>
           </View>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
@@ -275,7 +298,7 @@ class Tab5 extends React.Component{
               <Text>Notifications</Text>
             </View>
             <View style={{flex:1,paddingRight:16}}>
-              <Switch/>
+              <Switch onValueChange={(x) => this._notifications(x)} value={this.state.notifications}/>
             </View>
           </View>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
@@ -283,7 +306,7 @@ class Tab5 extends React.Component{
               <Text>Hmmm..??</Text>
             </View>
             <View style={{flex:1,paddingRight:16}}>
-              <Switch/>
+              <Switch onValueChange={(x) => this._hmm(x)} value={this.state.hmm}/>
             </View>
           </View>
         </ScrollView>
