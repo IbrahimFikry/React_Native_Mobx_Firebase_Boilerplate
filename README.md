@@ -1,3 +1,24 @@
+Hi! :3
+
+This is a boilerplate for creating a fast Mobile App React Native with Expo.
+
+## What to do
+
+Download/Clone the project then in the directory of the project from CMD or Bash run command:
+```
+npm install
+```
+
+After you have installed then run command:
+```
+npm start
+```
+
+## Testing
+You can use Genymotion to setup an android emulator;
+@
+You can use your own device. Just go through the installation EXPO on mobile and phone siinic
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).

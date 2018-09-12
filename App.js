@@ -146,15 +146,7 @@ class LoginPage extends React.Component{
     )
   }
 }
-const RegisterAndLogin = createStackNavigator(
-  {
-    LoginPage: {screen:LoginPage,},
-    RegisterPage: {screen:RegisterPage,},
-  },
-  {
-    headerMode: 'none'
-  }
-)
+
 
 class CameraActivation extends React.Component{
   state = {
@@ -494,6 +486,15 @@ const CameraTab = createStackNavigator(
   },
   {
     headerMode: 'none',
+  }
+)
+const RegisterAndLogin = createStackNavigator(
+  {
+    LoginPage: {screen:LoginPage,},
+    RegisterPage: {screen:RegisterPage,},
+  },
+  {
+    headerMode: 'none'
   }
 )
 
