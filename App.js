@@ -4,7 +4,7 @@ import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} fro
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inject, observer, Provider } from 'mobx-react';
-import { Camera, Permissions, ImagePicker } from 'expo';
+import { Camera, Permissions, ImagePicker, MapView  } from 'expo';
 
 const CONST_HEIGHT = Dimensions.get('window').height;
 const CONST_WIDTH = Dimensions.get('window').width;
@@ -468,7 +468,24 @@ class Tab5 extends React.Component{
     )
   }
 }
-
+class Tab6 extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <MapView
+        style={{ flex: 1 }}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
+    )
+  }
+}
 const CameraTab = createStackNavigator(
   {
     Tab3: {screen:Tab3,},
@@ -524,9 +541,21 @@ const TabHomePage = createBottomTabNavigator(
     Tab5: {
       screen: Tab5,
       navigationOptions: {
-        tabBarLabel: 'Settings',
+        tabBarLabel: false,
         tabBarIcon: () => <Icon name="gear" size={24} style={{color:'gray'}} />,
       },
+    },
+    Tab6: {
+      screen: Tab6,
+      navigationOptions: {
+        tabBarLabel: 'Maps',
+        tabBarIcon: () => <Icon name="globe" size={24} style={{color:'gray'}} />,
+      },
+    },
+  },
+  {
+    tabBarOptions: {
+      showLabel:false,
     },
   }
 )
