@@ -237,8 +237,39 @@ class Tab4 extends React.Component{
   }
   render() {
     return(
-      <View>
-      <Text>This is homepage</Text>
+      <View style={{paddingTop:Constants.statusBarHeight}}>
+
+        <View style={{alignItems:'center'}}>
+          <Text>Notifications</Text>
+        </View>
+
+      <FlatList
+        data={[
+          {key:'a', name:'Ibrahim Fikry'},
+          {key:'b', name:'Syimah Ismail' },
+          {key:'c', name: 'Haziq Faris'},
+          {key:'d', name:'Ibrahim Fikry'},
+          {key:'e', name:'Syimah Ismail' },
+          {key:'f', name: 'Haziq Faris'},
+        ]}
+        renderItem={({item}) => <TouchableOpacity>
+
+        <View style={{flexDirection:'row', borderBottomWidth:1,borderTopWidth:1,padding:8}}>
+
+
+
+          <View style={{flex:3}}>
+            <Text>Your Photo has been liked by {item.name}</Text>
+          </View>
+
+          <View style={{flex:1}}>
+            <Image style={{height:50,width:50}} source={{uri:'https://www.ftdimg.com/pics/products/7SPNY_330x370.jpg'}} />
+          </View>
+
+        </View>
+        </TouchableOpacity>
+        }
+      />
       </View>
     )
   }
