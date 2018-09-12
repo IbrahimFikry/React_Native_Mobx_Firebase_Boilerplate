@@ -4,7 +4,7 @@ import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} fro
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inject, observer, Provider } from 'mobx-react';
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, ImagePicker } from 'expo';
 
 const CONST_HEIGHT = Dimensions.get('window').height;
 const CONST_WIDTH = Dimensions.get('window').width;
@@ -221,16 +221,47 @@ class CameraActivation extends React.Component{
   }
 }
 class ImagePickerActivation extends React.Component{
-  constructor(props){
-    super(props);
+  state = {
+    image: null,
+  };
+
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    const { status2 } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
   }
+
   render() {
-    return(
-      <View>
-      <Text>Template Class</Text>
+    let { image } = this.state;
+
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button
+          title="Pick an image from camera roll"
+          onPress={this._pickImage}
+        />
+        <Button
+          title="Back"
+          onPress={()=>this.props.navigation.goBack(null)}
+        />
+        {image &&
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
       </View>
-    )
+    );
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
 }
 class Tab1 extends React.Component{
   constructor(props){
@@ -307,6 +338,7 @@ class Tab3 extends React.Component{
   }
   _imagepick = () => {
     console.log("Open ImagePicker");
+    this.props.navigation.navigate("ImagePickerActivation");
   }
 
 
@@ -441,6 +473,7 @@ const CameraTab = createStackNavigator(
   {
     Tab3: {screen:Tab3,},
     CameraActivation: {screen:CameraActivation,},
+    ImagePickerActivation: {screen:ImagePickerActivation,},
   },
   {
     headerMode: 'none',
