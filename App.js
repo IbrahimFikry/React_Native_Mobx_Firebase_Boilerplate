@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, Switch,TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Button,Dimensions,TextInput, Switch,TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inject, observer, Provider } from 'mobx-react';
+import { Camera, Permissions } from 'expo';
 
 const CONST_HEIGHT = Dimensions.get('window').height;
 const CONST_WIDTH = Dimensions.get('window').width;
@@ -155,6 +156,82 @@ const RegisterAndLogin = createStackNavigator(
   }
 )
 
+class CameraActivation extends React.Component{
+  state = {
+    hasCameraPermission: null,
+    type: Camera.Constants.Type.back,
+  };
+
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === 'granted' });
+  }
+
+  render() {
+    const { hasCameraPermission } = this.state;
+    if (hasCameraPermission === null) {
+      return <View />;
+    } else if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <Camera style={{ flex: 1 }} type={this.state.type}>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+              }}>
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  this.setState({
+                    type: this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                  });
+                }}>
+                <Text
+                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                  {' '}Flip{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => this.props.navigation.goBack(null)}>
+                <Text
+                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                  {' '}Back{' '}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        </View>
+      );
+    }
+  }
+}
+class ImagePickerActivation extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <View>
+      <Text>Template Class</Text>
+      </View>
+    )
+  }
+}
 class Tab1 extends React.Component{
   constructor(props){
     super(props);
@@ -223,10 +300,23 @@ class Tab3 extends React.Component{
   constructor(props){
     super(props);
   }
+
+  _camera = () => {
+    console.log("Open Camera");
+    this.props.navigation.navigate("CameraActivation");
+  }
+  _imagepick = () => {
+    console.log("Open ImagePicker");
+  }
+
+
+
+
   render() {
     return(
-      <View>
-      <Text>This is homepage</Text>
+      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+      <Button title="Camera" onPress={this._camera}/>
+      <Button title="ImagePicker" onPress={this._imagepick}/>
       </View>
     )
   }
@@ -347,6 +437,27 @@ class Tab5 extends React.Component{
   }
 }
 
+const CameraTab = createStackNavigator(
+  {
+    Tab3: {screen:Tab3,},
+    CameraActivation: {screen:CameraActivation,},
+  },
+  {
+    headerMode: 'none',
+  }
+)
+
+CameraTab.navigationOptions = ({navigation}) => {
+  let tabBarVisible = true;
+  if(navigation.state.index > 0){
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  }
+}
+
 const TabHomePage = createBottomTabNavigator(
   {
     Tab1: {
@@ -364,7 +475,7 @@ const TabHomePage = createBottomTabNavigator(
       },
     },
     Tab3: {
-      screen: Tab3,
+      screen: CameraTab,
       navigationOptions: {
         tabBarLabel: 'Camera',
         tabBarIcon: () => <Icon name="camera" size={24} style={{color:'gray'}} />,
