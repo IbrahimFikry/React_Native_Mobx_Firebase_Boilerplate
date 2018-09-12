@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, Image, ImageBackground, Dimensions,TextInput, Switch,TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import {createStackNavigator,createBottomTabNavigator,createDrawerNavigator} from 'react-navigation';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -35,7 +35,7 @@ class RegisterPage extends React.Component{
 
           <View style={{alignSelf:'stretch',justifyContent:'flex-start'}}>
             <TouchableOpacity onPress={this._back}>
-              <Icon style={{paddingLeft: 10,}} name="chevron-left" size={48} color="#91999c" />
+              <Icon style={{paddingLeft: 18,}} name="chevron-left" size={24} color="#91999c" />
             </TouchableOpacity>
           </View>
 
@@ -231,25 +231,100 @@ class Tab3 extends React.Component{
     )
   }
 }
+class Tab4 extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <View>
+      <Text>This is homepage</Text>
+      </View>
+    )
+  }
+}
+class Tab5 extends React.Component{
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <View style={{paddingTop:Constants.statusBarHeight}}>
+        <View style={{alignItems:'center'}}>
+          <Text>Settings</Text>
+        </View>
+
+        <ScrollView>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
+            <View style={{flex:3,paddingLeft:16}}>
+              <Text>Profile</Text>
+            </View>
+            <View style={{flex:1,paddingRight:16}}>
+            </View>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
+            <View style={{flex:3,paddingLeft:16}}>
+              <Text>Theme (Light/Black)</Text>
+            </View>
+            <View style={{flex:1,paddingRight:16}}>
+              <Switch/>
+            </View>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
+            <View style={{flex:3,paddingLeft:16}}>
+              <Text>Notifications</Text>
+            </View>
+            <View style={{flex:1,paddingRight:16}}>
+              <Switch/>
+            </View>
+          </View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,marginBottom:10}}>
+            <View style={{flex:3,paddingLeft:16}}>
+              <Text>Hmmm..??</Text>
+            </View>
+            <View style={{flex:1,paddingRight:16}}>
+              <Switch/>
+            </View>
+          </View>
+        </ScrollView>
+
+      </View>
+    )
+  }
+}
 
 const TabHomePage = createBottomTabNavigator(
   {
     Tab1: {
       screen: Tab1,
       navigationOptions: {
-        tabBarLabel: 'Dashboard',
+        tabBarLabel: 'Home',
         tabBarIcon: () => <Icon name="th" size={24} style={{color:'gray'}} />,
       },
     },
     Tab2: {
       screen: Tab2,
       navigationOptions: {
-        tabBarLabel: 'Dashboard',
-        tabBarIcon: () => <Icon name="bar-chart" size={24} style={{color:'gray'}} />,
+        tabBarLabel: 'Likes',
+        tabBarIcon: () => <Icon name="heart" size={24} style={{color:'gray'}} />,
       },
     },
     Tab3: {
       screen: Tab3,
+      navigationOptions: {
+        tabBarLabel: 'Camera',
+        tabBarIcon: () => <Icon name="camera" size={24} style={{color:'gray'}} />,
+      },
+    },
+    Tab4: {
+      screen: Tab4,
+      navigationOptions: {
+        tabBarLabel: 'Notifications',
+        tabBarIcon: () => <Icon name="bell" size={24} style={{color:'gray'}} />,
+      },
+    },
+    Tab5: {
+      screen: Tab5,
       navigationOptions: {
         tabBarLabel: 'Settings',
         tabBarIcon: () => <Icon name="gear" size={24} style={{color:'gray'}} />,
