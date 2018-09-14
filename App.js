@@ -587,7 +587,27 @@ class LoadingStackNav extends React.Component{
   }
 }
 
+// const XNavigator = createStackNavigator(
+//   {
+//     Main: { screen: App },
+//     homepage: { screen: Home },
+//     register: { screen: Regos },
+//   },
+//   {
+//     initialRouteName: 'Main',
+//     headerMode: 'none',
+//   }
+// );
 
+// const MNavigator = createDrawerNavigator(
+//   {
+//     Agriculture: {screen: Agriculture,},
+//     Smart_Manufacturing: {screen: classTab1,},
+//   },
+//   {
+//     contentComponent: ({navigation}) => <DrawerContent navigation={navigation}/>
+//   }
+// )
 
 
 export default class Master extends React.Component{
