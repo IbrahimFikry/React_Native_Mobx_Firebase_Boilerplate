@@ -515,48 +515,50 @@ const TabHomePage = createBottomTabNavigator(
       screen: Tab1,
       navigationOptions: {
         tabBarLabel: 'Home',
-        tabBarIcon: () => <Icon name="th" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="th" size={24}  color={tintColor}/>,
       },
     },
     Tab2: {
       screen: Tab2,
       navigationOptions: {
         tabBarLabel: 'Likes',
-        tabBarIcon: () => <Icon name="heart" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="heart" size={24} color={tintColor} />,
       },
     },
     Tab3: {
       screen: CameraTab,
       navigationOptions: {
         tabBarLabel: 'Camera',
-        tabBarIcon: () => <Icon name="camera" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="camera" size={24} color={tintColor} />,
       },
     },
     Tab4: {
       screen: Tab4,
       navigationOptions: {
         tabBarLabel: 'Notifications',
-        tabBarIcon: () => <Icon name="bell" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="bell" size={24} color={tintColor} />,
       },
     },
     Tab5: {
       screen: Tab5,
       navigationOptions: {
         tabBarLabel: false,
-        tabBarIcon: () => <Icon name="gear" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="gear" size={24} color={tintColor} />,
       },
     },
     Tab6: {
       screen: Tab6,
       navigationOptions: {
         tabBarLabel: 'Maps',
-        tabBarIcon: () => <Icon name="globe" size={24} style={{color:'gray'}} />,
+        tabBarIcon: ({ tintColor, activeTintColor }) => <Icon name="globe" size={24} style={{color:'gray'}} />,
       },
     },
   },
   {
     tabBarOptions: {
       showLabel:false,
+      activeTintolor: '#3B4569',
+      inactiveTintColor: '#ccc',
     },
   }
 )
@@ -585,6 +587,9 @@ class LoadingStackNav extends React.Component{
   }
 }
 
+
+
+
 export default class Master extends React.Component{
   constructor(props){
     super(props);
@@ -597,34 +602,6 @@ export default class Master extends React.Component{
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({
